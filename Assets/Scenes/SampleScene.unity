@@ -372,9 +372,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2202c9c184708a438b4d0b3fd85571a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShootingEnemyBehaviour
-  PlayerLayer:
+  PlayerDetected: 0
+  playerLayer:
     serializedVersion: 2
     m_Bits: 8
+  projectile: {fileID: 346841848313743422, guid: aafdc73d4725c19469d6458093109a61, type: 3}
 --- !u!58 &1068364265
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -426,7 +428,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -437,7 +439,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &1068364267
 SpriteRenderer:
   m_ObjectHideFlags: 0
