@@ -4,13 +4,16 @@ using UnityEngine;
 public class ShootingEnemyBehaviour : MonoBehaviour
 {
     public bool PlayerDetected = false;
-    float detectionSize = 100F;
+    float detectionSize = 10F;
     Vector2 detectionOriginOffset = Vector2.zero;
-    Vector2 detectionOrigin;
+    public Vector2 detectionOrigin;
+    public Vector2 detectedObjectPosition;
     public LayerMask playerLayer;
     RaycastHit2D detectedObject;
     float detectionRefreshTimer = 3;
     public Rigidbody2D projectile;
+    Rigidbody2D instantiatedProjectile;
+    public Vector2 aimVector;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,6 +36,9 @@ public class ShootingEnemyBehaviour : MonoBehaviour
         detectedObject = Physics2D.CircleCast(detectionOrigin, detectionSize, detectionOriginOffset, 0F, playerLayer);
         if (detectedObject)
         {
+            detectedObjectPosition = new Vector2(detectedObject.centroid.x, detectedObject.centroid.y);
+            aimVector = detectionOrigin - detectedObjectPosition;
+            Debug.Log(aimVector);
             if (PlayerDetected == false)
             {
                 PlayerDetected = true;
@@ -48,12 +54,12 @@ public class ShootingEnemyBehaviour : MonoBehaviour
         else
         {
             PlayerDetected = false;
-
         }
     }
 
     void ShootProjectile()
     {
-        Instantiate(projectile, transform, transform);
+        instantiatedProjectile = Instantiate(projectile, gameObject.transform, gameObject.transform);
+        instantiatedProjectile.linearVelocity = aimVector * 2;
     }
 }
