@@ -60,6 +60,6 @@ public class ShootingEnemyBehaviour : MonoBehaviour
     void ShootProjectile()
     {
         instantiatedProjectile = Instantiate(projectile, gameObject.transform);
-        instantiatedProjectile.linearVelocity = aimVector * 2;
+        instantiatedProjectile.linearVelocity = aimVector * 1.2f;
     }
 }

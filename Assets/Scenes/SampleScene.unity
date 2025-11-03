@@ -355,7 +355,7 @@ GameObject:
   - component: {fileID: 1068364264}
   m_Layer: 6
   m_Name: Triangle
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -753,6 +753,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBehaviour
   rb: {fileID: 1680712991}
   health: 0
+  projectile: {fileID: 995368999579798282, guid: 1599b79d679e8d34d9e0e0e646dc8dce, type: 3}
 --- !u!1001 &8992501118487000046
 PrefabInstance:
   m_ObjectHideFlags: 0
