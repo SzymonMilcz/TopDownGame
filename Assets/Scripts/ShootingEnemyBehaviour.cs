@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ShootingEnemyBehaviour : MonoBehaviour
 {
+    public float health;
     public bool PlayerDetected = false;
     float detectionSize = 10F;
     Vector2 detectionOriginOffset = Vector2.zero;
@@ -61,5 +62,14 @@ public class ShootingEnemyBehaviour : MonoBehaviour
     {
         instantiatedProjectile = Instantiate(projectile, gameObject.transform);
         instantiatedProjectile.linearVelocity = aimVector * 1.2f;
+    }
+
+    void HealthCheck(float damageValue)
+    {
+        health = health - damageValue;
+        if (health < 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

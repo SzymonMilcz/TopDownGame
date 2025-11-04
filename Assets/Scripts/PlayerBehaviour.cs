@@ -10,9 +10,12 @@ public class PlayerBehaviour : MonoBehaviour
     private float mercyInvincible = 0; //Value used to grant temporary invulnerability after taking damage, roughly for one second
     Vector3 cursorPosition;
     private Camera cam;
-    Vector2 shootingAngle;
+    Vector3 shootingAngle;
     public Rigidbody2D projectile;
     Rigidbody2D instantiatedProjectile;
+    Vector3 projectileOrigin;
+    public float shootingDelay;
+    float currentShootingDelay;
     void Start()
     {
         moveAction = InputSystem.actions.FindAction("Move");
@@ -50,8 +53,16 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Attack()
     {
-        cursorPosition = cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        shootingAngle = new Vector3(cursorPosition.x - transform.position.x, cursorPosition.y - transform.position.y, 0);
-        instantiatedProjectile = Instantiate(projectile, transform);
+        if (currentShootingDelay < Time.time)
+        {
+            cursorPosition = cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            shootingAngle = new Vector3(cursorPosition.x - transform.position.x, cursorPosition.y - transform.position.y, 0);
+            shootingAngle.Normalize();
+            projectileOrigin = transform.position + shootingAngle;
+            instantiatedProjectile = Instantiate(projectile, projectileOrigin, Quaternion.identity, transform);
+            instantiatedProjectile.AddForce(shootingAngle * 200);
+            currentShootingDelay = Time.time + shootingDelay;
+        }
+        
     }
 }

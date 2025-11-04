@@ -20,7 +20,7 @@ public class EnemyProjectile : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D touchedObj)
+    void OnTriggerEnter2D(Collider2D touchedObj)
     {
         if (touchedObj.gameObject.CompareTag("Player"))
         {
