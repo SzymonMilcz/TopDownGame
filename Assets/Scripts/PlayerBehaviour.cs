@@ -6,7 +6,7 @@ public class PlayerBehaviour : MonoBehaviour
     InputAction moveAction;
     InputAction attackAction;
     public Rigidbody2D rb;
-    public int health; //Value is made public for testing purposes; it can be seen in the editor if it's public
+    public float health; //Value is made public for testing purposes; it can be seen in the editor if it's public
     private float mercyInvincible = 0; //Value used to grant temporary invulnerability after taking damage, roughly for one second
     Vector3 cursorPosition;
     private Camera cam;
@@ -36,7 +36,7 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
-    public void HealthCheck(int damageValue)
+    public void HealthCheck(float damageValue)
     {
         if (mercyInvincible < Time.time)
         {
@@ -49,6 +49,12 @@ public class PlayerBehaviour : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void HeavyDamage(Vector3 damageReceived)
+    {
+        rb.AddForce(new Vector2(damageReceived.x, damageReceived.y) * 3);
+        HealthCheck(damageReceived.z);
     }
 
     void Attack()
