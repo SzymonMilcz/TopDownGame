@@ -5,7 +5,7 @@ public class ShootingEnemyBehaviour : MonoBehaviour
 {
     public float health;
     public bool PlayerDetected = false;
-    float detectionSize = 10F;
+    float detectionSize = 20;
     Vector2 detectionOriginOffset = Vector2.zero;
     public Vector2 detectionOrigin;
     public Vector2 detectedObjectPosition;
@@ -19,7 +19,7 @@ public class ShootingEnemyBehaviour : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        detectionRefreshTimer += Time.time;
+        detectionRefreshTimer = Time.time + 1;
     }
 
     // Update is called once per frame

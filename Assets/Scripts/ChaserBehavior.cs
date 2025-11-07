@@ -6,18 +6,18 @@ public class ChaserBehavior : MonoBehaviour
     public float contactDamage;
     public Rigidbody2D self;
     public bool PlayerDetected = false;
-    float detectionSize = 10F;
+    float detectionSize = 20;
     Vector2 detectionOriginOffset = Vector2.zero;
     public Vector2 detectionOrigin;
     public Vector2 detectedObjectPosition;
     public LayerMask playerLayer;
     RaycastHit2D detectedObject;
-    float detectionRefreshTimer = 1;
+    public float detectionRefreshTimer;
     public Vector2 aimVector;
     Vector3 damageAndVelocity;
     void Start()
     {
-        detectionRefreshTimer += Time.time;
+        detectionRefreshTimer = Time.time + 1;
     }
 
     // Update is called once per frame
