@@ -1,10 +1,8 @@
 using UnityEngine;
 
-public class ChaserBehavior : MonoBehaviour
+public class MachinegunEnemyBehavior : MonoBehaviour
 {
     public float health;
-    public float contactDamage;
-    public Rigidbody2D self;
     public bool PlayerDetected = false;
     float detectionSize = 20;
     Vector2 detectionOriginOffset = Vector2.zero;
@@ -12,15 +10,19 @@ public class ChaserBehavior : MonoBehaviour
     public Vector2 detectedObjectPosition;
     public LayerMask playerLayer;
     RaycastHit2D detectedObject;
-    public float detectionRefreshTimer;
+    float detectionRefreshTimer = 3;
+    float attackDelay = 3;
+    bool shootingBurst = false;
+    int attackCount = 5;
+    public Rigidbody2D projectile;
+    Rigidbody2D instantiatedProjectile;
     public Vector2 aimVector;
-    Vector3 damageAndVelocity;
+
     void Start()
     {
         detectionRefreshTimer = Time.time + 1;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (detectionRefreshTimer < Time.time)
@@ -36,19 +38,21 @@ public class ChaserBehavior : MonoBehaviour
         if (detectedObject)
         {
             detectedObjectPosition = new Vector2(detectedObject.transform.position.x, detectedObject.transform.position.y);
-            aimVector = detectedObjectPosition - detectionOrigin;
-            aimVector.Normalize();
             Debug.Log(aimVector);
             if (PlayerDetected == false)
             {
                 PlayerDetected = true;
                 detectionRefreshTimer += 3;
             }
-            else
+            else if (shootingBurst == false && PlayerDetected == true)
             {
-                AttackPlayer();
+                aimVector = detectedObjectPosition - detectionOrigin;
+                ShootProjectile();
+                shootingBurst = true;
                 detectionRefreshTimer += 3;
-            }
+                attackCount = 5;
+            }            
+            Debug.Log("Player found");
         }
         else
         {
@@ -56,26 +60,20 @@ public class ChaserBehavior : MonoBehaviour
         }
     }
 
-    void AttackPlayer()
+    void ShootProjectile()
     {
-        self.AddForce(aimVector * 1200);
-    }
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
+        while (attackCount > 0)
         {
-            damageAndVelocity.z = contactDamage;
-            collision.gameObject.SendMessage("HeavyDamage", damageAndVelocity);
+            instantiatedProjectile = Instantiate(projectile, gameObject.transform);
+            instantiatedProjectile.linearVelocity = aimVector * 1.2f;
+            attackDelay = Time.time + 0.2F;
+            attackCount--;
         }
-
-        if (collision.gameObject.CompareTag("Projectile"))
+        if (attackCount == 0)
         {
-            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), collision.gameObject.GetComponent<Collider2D>());
-        }
-        else
-        {
-            self.linearVelocity = self.linearVelocity * -1;
+            shootingBurst = false;
+            detectionRefreshTimer = Time.time + 3;
         }
     }
 
@@ -88,3 +86,4 @@ public class ChaserBehavior : MonoBehaviour
         }
     }
 }
+
