@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class MachinegunEnemyBehavior : MonoBehaviour
@@ -11,7 +12,7 @@ public class MachinegunEnemyBehavior : MonoBehaviour
     public LayerMask playerLayer;
     RaycastHit2D detectedObject;
     float detectionRefreshTimer = 3;
-    float attackDelay = 3;
+    float attackDelay = 0.2f;
     bool shootingBurst = false;
     int attackCount = 5;
     public Rigidbody2D projectile;
@@ -28,6 +29,11 @@ public class MachinegunEnemyBehavior : MonoBehaviour
         if (detectionRefreshTimer < Time.time)
         {
             PlayerDetectionCheck();
+        }
+        if (shootingBurst == true && attackDelay < Time.time)
+        {
+            ShootProjectile();
+            attackDelay = Time.time + 0.2F;
         }
     }
 
@@ -51,7 +57,7 @@ public class MachinegunEnemyBehavior : MonoBehaviour
                 shootingBurst = true;
                 detectionRefreshTimer += 3;
                 attackCount = 5;
-            }            
+            }
             Debug.Log("Player found");
         }
         else
@@ -63,11 +69,10 @@ public class MachinegunEnemyBehavior : MonoBehaviour
     void ShootProjectile()
     {
 
-        while (attackCount > 0)
+        if (attackCount > 0)
         {
             instantiatedProjectile = Instantiate(projectile, gameObject.transform);
             instantiatedProjectile.linearVelocity = aimVector * 1.2f;
-            attackDelay = Time.time + 0.2F;
             attackCount--;
         }
         if (attackCount == 0)
