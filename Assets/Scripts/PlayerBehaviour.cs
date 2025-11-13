@@ -28,8 +28,15 @@ public class PlayerBehaviour : MonoBehaviour
     {
         //Velocity achieved via copying the moveValue is too slow, so it is increased threefold
         Vector2 moveValue = moveAction.ReadValue<Vector2>();
-        rb.linearVelocityX = moveValue.x * 3;
-        rb.linearVelocityY = moveValue.y * 3;
+        if (rb.linearVelocityX < 7)
+        {
+            rb.AddForceX(moveValue.x * 8);
+        }
+        if (rb.linearVelocityY < 7)
+        {
+            rb.AddForceY(moveValue.y * 8);  
+        }
+        
         if (attackAction.IsPressed())
         {
             Attack();
@@ -45,7 +52,7 @@ public class PlayerBehaviour : MonoBehaviour
             mercyInvincible = Time.time + 1F;
             Debug.Log(Time.time);
         }
-        if (health < 0)
+        if (health <= 0)
         {
             Destroy(gameObject);
         }

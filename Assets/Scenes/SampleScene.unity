@@ -119,6 +119,63 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &448113300
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 855006386929772858, guid: c9a21d063e7e70b4db3950b8c8553c41, type: 3}
+      propertyPath: m_Name
+      value: Chaser
+      objectReference: {fileID: 0}
+    - target: {fileID: 4999976303557342452, guid: c9a21d063e7e70b4db3950b8c8553c41, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.608423
+      objectReference: {fileID: 0}
+    - target: {fileID: 4999976303557342452, guid: c9a21d063e7e70b4db3950b8c8553c41, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.583051
+      objectReference: {fileID: 0}
+    - target: {fileID: 4999976303557342452, guid: c9a21d063e7e70b4db3950b8c8553c41, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4999976303557342452, guid: c9a21d063e7e70b4db3950b8c8553c41, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4999976303557342452, guid: c9a21d063e7e70b4db3950b8c8553c41, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4999976303557342452, guid: c9a21d063e7e70b4db3950b8c8553c41, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4999976303557342452, guid: c9a21d063e7e70b4db3950b8c8553c41, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4999976303557342452, guid: c9a21d063e7e70b4db3950b8c8553c41, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4999976303557342452, guid: c9a21d063e7e70b4db3950b8c8553c41, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4999976303557342452, guid: c9a21d063e7e70b4db3950b8c8553c41, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c9a21d063e7e70b4db3950b8c8553c41, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,7 +476,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 0
+  m_LinearDamping: 4
   m_AngularDamping: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -570,10 +627,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5172997065871318773, guid: b40f1c9d77c04484f870c8e7e6e696d7, type: 3}
-      propertyPath: m_BodyType
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8244804480779890946, guid: b40f1c9d77c04484f870c8e7e6e696d7, type: 3}
       propertyPath: m_Name
       value: Machinegunner
@@ -636,3 +689,4 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 1680712993}
   - {fileID: 1931999234}
+  - {fileID: 448113300}

@@ -85,7 +85,7 @@ public class MachinegunEnemyBehavior : MonoBehaviour
     void HealthCheck(float damageValue)
     {
         health = health - damageValue;
-        if (health < 0)
+        if (health <= 0)
         {
             Destroy(gameObject);
         }

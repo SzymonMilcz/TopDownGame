@@ -27,6 +27,10 @@ public class EnemyProjectile : MonoBehaviour
             touchedObj.gameObject.SendMessage("HealthCheck", damageValue);
             Destroy(gameObject);
         }
+        if (touchedObj.gameObject.CompareTag("Enemy") || touchedObj.gameObject.CompareTag("Projectile"))
+        {
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), touchedObj.gameObject.GetComponent<Collider2D>());
+        }
         else
         {
             Destroy(gameObject);
