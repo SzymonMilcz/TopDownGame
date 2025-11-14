@@ -1,7 +1,7 @@
-using Unity.VisualScripting;
+using System.Threading.Tasks;
 using UnityEngine;
 
-public class ShootingEnemyBehaviour : MonoBehaviour
+public class MachinegunEnemyBehavior : MonoBehaviour
 {
     public float health;
     public bool PlayerDetected = false;
@@ -12,22 +12,28 @@ public class ShootingEnemyBehaviour : MonoBehaviour
     public LayerMask playerLayer;
     RaycastHit2D detectedObject;
     float detectionRefreshTimer = 3;
+    float attackDelay = 0.2f;
+    bool shootingBurst = false;
+    int attackCount = 5;
     public Rigidbody2D projectile;
     Rigidbody2D instantiatedProjectile;
     public Vector2 aimVector;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         detectionRefreshTimer = Time.time + 1;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (detectionRefreshTimer < Time.time)
         {
             PlayerDetectionCheck();
+        }
+        if (shootingBurst == true && attackDelay < Time.time)
+        {
+            ShootProjectile();
+            attackDelay = Time.time + 0.2F;
         }
     }
 
@@ -38,18 +44,20 @@ public class ShootingEnemyBehaviour : MonoBehaviour
         if (detectedObject)
         {
             detectedObjectPosition = new Vector2(detectedObject.transform.position.x, detectedObject.transform.position.y);
-            aimVector = detectedObjectPosition - detectionOrigin;
             Debug.Log(aimVector);
             if (PlayerDetected == false)
             {
                 PlayerDetected = true;
                 detectionRefreshTimer += 3;
             }
-            else
+            else if (shootingBurst == false && PlayerDetected == true)
             {
+                aimVector = detectedObjectPosition - detectionOrigin;
                 ShootProjectile();
+                shootingBurst = true;
                 detectionRefreshTimer += 3;
-            }            
+                attackCount = 5;
+            }
             Debug.Log("Player found");
         }
         else
@@ -60,8 +68,18 @@ public class ShootingEnemyBehaviour : MonoBehaviour
 
     void ShootProjectile()
     {
-        instantiatedProjectile = Instantiate(projectile, gameObject.transform);
-        instantiatedProjectile.linearVelocity = aimVector * 1.2f;
+
+        if (attackCount > 0)
+        {
+            instantiatedProjectile = Instantiate(projectile, gameObject.transform);
+            instantiatedProjectile.linearVelocity = aimVector * 1.2f;
+            attackCount--;
+        }
+        if (attackCount == 0)
+        {
+            shootingBurst = false;
+            detectionRefreshTimer = Time.time + 3;
+        }
     }
 
     void HealthCheck(float damageValue)
@@ -73,3 +91,4 @@ public class ShootingEnemyBehaviour : MonoBehaviour
         }
     }
 }
+

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyProjectile : MonoBehaviour
+public class PlayerProjectileBehavior : MonoBehaviour
 {
     public int damageValue;
     public Collider2D projectileCollider;
@@ -8,7 +8,6 @@ public class EnemyProjectile : MonoBehaviour
     public float projectileLifetime;
     void Start()
     {
-        Physics2D.IgnoreLayerCollision(6, 6);
         projectileLifetime += Time.time;
     }
 
@@ -22,12 +21,12 @@ public class EnemyProjectile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D touchedObj)
     {
-        if (touchedObj.gameObject.CompareTag("Player"))
+        if (touchedObj.gameObject.CompareTag("Enemy"))
         {
             touchedObj.gameObject.SendMessage("HealthCheck", damageValue);
             Destroy(gameObject);
         }
-        if (touchedObj.gameObject.CompareTag("Enemy") || touchedObj.gameObject.CompareTag("Projectile"))
+        if (touchedObj.gameObject.CompareTag("Player") || touchedObj.gameObject.CompareTag("Projectile"))
         {
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), touchedObj.gameObject.GetComponent<Collider2D>());
         }

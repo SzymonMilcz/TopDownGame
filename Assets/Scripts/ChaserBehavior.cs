@@ -1,9 +1,10 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class ShootingEnemyBehaviour : MonoBehaviour
+public class ChaserBehavior : MonoBehaviour
 {
     public float health;
+    public float contactDamage;
+    public Rigidbody2D self;
     public bool PlayerDetected = false;
     float detectionSize = 20;
     Vector2 detectionOriginOffset = Vector2.zero;
@@ -11,12 +12,9 @@ public class ShootingEnemyBehaviour : MonoBehaviour
     public Vector2 detectedObjectPosition;
     public LayerMask playerLayer;
     RaycastHit2D detectedObject;
-    float detectionRefreshTimer = 3;
-    public Rigidbody2D projectile;
-    Rigidbody2D instantiatedProjectile;
+    public float detectionRefreshTimer;
     public Vector2 aimVector;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    Vector3 damageAndVelocity;
     void Start()
     {
         detectionRefreshTimer = Time.time + 1;
@@ -39,6 +37,7 @@ public class ShootingEnemyBehaviour : MonoBehaviour
         {
             detectedObjectPosition = new Vector2(detectedObject.transform.position.x, detectedObject.transform.position.y);
             aimVector = detectedObjectPosition - detectionOrigin;
+            aimVector.Normalize();
             Debug.Log(aimVector);
             if (PlayerDetected == false)
             {
@@ -47,10 +46,9 @@ public class ShootingEnemyBehaviour : MonoBehaviour
             }
             else
             {
-                ShootProjectile();
+                AttackPlayer();
                 detectionRefreshTimer += 3;
-            }            
-            Debug.Log("Player found");
+            }
         }
         else
         {
@@ -58,10 +56,27 @@ public class ShootingEnemyBehaviour : MonoBehaviour
         }
     }
 
-    void ShootProjectile()
+    void AttackPlayer()
     {
-        instantiatedProjectile = Instantiate(projectile, gameObject.transform);
-        instantiatedProjectile.linearVelocity = aimVector * 1.2f;
+        self.AddForce(aimVector * 1200);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            damageAndVelocity.z = contactDamage;
+            collision.gameObject.SendMessage("HeavyDamage", damageAndVelocity);
+        }
+
+        if (collision.gameObject.CompareTag("Projectile"))
+        {
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), collision.gameObject.GetComponent<Collider2D>());
+        }
+        else
+        {
+            self.linearVelocity = self.linearVelocity * -1;
+        }
     }
 
     void HealthCheck(float damageValue)
