@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ShootingEnemyBehaviour : MonoBehaviour
+public class SplitterBehaviour : MonoBehaviour
 {
     public float health;
     public bool PlayerDetected = false;
@@ -12,16 +12,16 @@ public class ShootingEnemyBehaviour : MonoBehaviour
     RaycastHit2D detectedObject;
     float detectionRefreshTimer = 3;
     public Rigidbody2D projectile;
-    Rigidbody2D instantiatedProjectile;
-    public Vector2 aimVector;
+    Rigidbody2D instantiatedProjectileOne;
+    Rigidbody2D instantiatedProjectileTwo;
+    public Vector2 aimVectorOne;
+    public Vector2 aimVectorTwo;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         detectionRefreshTimer = Time.time + 1;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (detectionRefreshTimer < Time.time)
@@ -37,8 +37,10 @@ public class ShootingEnemyBehaviour : MonoBehaviour
         if (detectedObject)
         {
             detectedObjectPosition = new Vector2(detectedObject.transform.position.x, detectedObject.transform.position.y);
-            aimVector = detectedObjectPosition - detectionOrigin;
-            aimVector.Normalize();
+            aimVectorOne = detectedObjectPosition * 1.3f - detectionOrigin;
+            aimVectorOne.Normalize();
+            aimVectorTwo = detectedObjectPosition * 0.7f - detectionOrigin;
+            aimVectorTwo.Normalize();
             if (PlayerDetected == false)
             {
                 PlayerDetected = true;
@@ -59,8 +61,10 @@ public class ShootingEnemyBehaviour : MonoBehaviour
 
     void ShootProjectile()
     {
-        instantiatedProjectile = Instantiate(projectile, gameObject.transform);
-        instantiatedProjectile.linearVelocity = aimVector * 4f;
+        instantiatedProjectileOne = Instantiate(projectile, gameObject.transform);
+        instantiatedProjectileOne.linearVelocity = aimVectorOne * 4f;
+        instantiatedProjectileTwo = Instantiate(projectile, gameObject.transform);
+        instantiatedProjectileTwo.linearVelocity = aimVectorTwo * 4f;
     }
 
     void HealthCheck(float damageValue)

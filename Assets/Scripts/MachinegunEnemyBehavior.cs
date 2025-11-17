@@ -44,7 +44,6 @@ public class MachinegunEnemyBehavior : MonoBehaviour
         if (detectedObject)
         {
             detectedObjectPosition = new Vector2(detectedObject.transform.position.x, detectedObject.transform.position.y);
-            Debug.Log(aimVector);
             if (PlayerDetected == false)
             {
                 PlayerDetected = true;
@@ -53,6 +52,7 @@ public class MachinegunEnemyBehavior : MonoBehaviour
             else if (shootingBurst == false && PlayerDetected == true)
             {
                 aimVector = detectedObjectPosition - detectionOrigin;
+                aimVector.Normalize();
                 ShootProjectile();
                 shootingBurst = true;
                 detectionRefreshTimer += 3;
@@ -72,7 +72,7 @@ public class MachinegunEnemyBehavior : MonoBehaviour
         if (attackCount > 0)
         {
             instantiatedProjectile = Instantiate(projectile, gameObject.transform);
-            instantiatedProjectile.linearVelocity = aimVector * 1.2f;
+            instantiatedProjectile.linearVelocity = aimVector * 4f;
             attackCount--;
         }
         if (attackCount == 0)

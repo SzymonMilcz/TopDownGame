@@ -4,7 +4,6 @@ public class EnemyProjectile : MonoBehaviour
 {
     public int damageValue;
     public Collider2D projectileCollider;
-    public LayerMask projectileLayer;
     public float projectileLifetime;
     void Start()
     {

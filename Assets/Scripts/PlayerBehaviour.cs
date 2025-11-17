@@ -28,15 +28,9 @@ public class PlayerBehaviour : MonoBehaviour
     {
         //Velocity achieved via copying the moveValue is too slow, so it is increased threefold
         Vector2 moveValue = moveAction.ReadValue<Vector2>();
-        if (rb.linearVelocityX < 7)
-        {
-            rb.AddForceX(moveValue.x * 8);
-        }
-        if (rb.linearVelocityY < 7)
-        {
-            rb.AddForceY(moveValue.y * 8);  
-        }
-        
+            rb.linearVelocityX = moveValue.x * 3;
+            rb.linearVelocityY = moveValue.y * 3;  
+
         if (attackAction.IsPressed())
         {
             Attack();
