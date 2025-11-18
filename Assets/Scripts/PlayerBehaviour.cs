@@ -1,10 +1,14 @@
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
+using UnityEngine.UI;
+
 public class PlayerBehaviour : MonoBehaviour
 {
     InputAction moveAction;
     InputAction attackAction;
+    public Slider healthSlider;
     public Rigidbody2D rb;
     public float health; //Value is made public for testing purposes; it can be seen in the editor if it's public
     private float mercyInvincible = 0; //Value used to grant temporary invulnerability after taking damage, roughly for one second
@@ -20,7 +24,8 @@ public class PlayerBehaviour : MonoBehaviour
     {
         moveAction = InputSystem.actions.FindAction("Move");
         attackAction = InputSystem.actions.FindAction("Attack");
-        health = 100;
+        healthSlider.maxValue = health;
+        healthSlider.value = health; 
         cam = Camera.main;
     }
 
@@ -42,6 +47,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (mercyInvincible < Time.time)
         {
             health = health - damageValue;
+            healthSlider.value = health;
             Debug.Log("Current health: " + health);
             mercyInvincible = Time.time + 1F;
             Debug.Log(Time.time);

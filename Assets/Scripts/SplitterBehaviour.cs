@@ -5,7 +5,6 @@ public class SplitterBehaviour : MonoBehaviour
     public float health;
     public bool PlayerDetected = false;
     float detectionSize = 20;
-    Vector2 detectionOriginOffset = Vector2.zero;
     public Vector2 detectionOrigin;
     public Vector2 detectedObjectPosition;
     public LayerMask playerLayer;
@@ -19,7 +18,7 @@ public class SplitterBehaviour : MonoBehaviour
 
     void Start()
     {
-        detectionRefreshTimer = Time.time + 1;
+        detectionRefreshTimer = Time.time + 0.5f;
     }
 
     void Update()
@@ -33,11 +32,11 @@ public class SplitterBehaviour : MonoBehaviour
     void PlayerDetectionCheck()
     {
         detectionOrigin = new Vector2(transform.position.x, transform.position.y);
-        detectedObject = Physics2D.CircleCast(detectionOrigin, detectionSize, detectionOriginOffset, 0F, playerLayer);
+        detectedObject = Physics2D.CircleCast(detectionOrigin, detectionSize, Vector2.zero, 0F, playerLayer);
         if (detectedObject)
         {
             detectedObjectPosition = new Vector2(detectedObject.transform.position.x, detectedObject.transform.position.y);
-            aimVectorOne = detectedObjectPosition * 1.3f - detectionOrigin;
+            aimVectorOne = detectedObjectPosition * 1.3f - detectionOrigin; //this does not work properly, value difference between aimvector one and two can vary wildly based on how close the player is to being on the same X or Y coordinate of the enemy
             aimVectorOne.Normalize();
             aimVectorTwo = detectedObjectPosition * 0.7f - detectionOrigin;
             aimVectorTwo.Normalize();

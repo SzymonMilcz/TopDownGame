@@ -6,7 +6,6 @@ public class MachinegunEnemyBehavior : MonoBehaviour
     public float health;
     public bool PlayerDetected = false;
     float detectionSize = 20;
-    Vector2 detectionOriginOffset = Vector2.zero;
     public Vector2 detectionOrigin;
     public Vector2 detectedObjectPosition;
     public LayerMask playerLayer;
@@ -21,7 +20,7 @@ public class MachinegunEnemyBehavior : MonoBehaviour
 
     void Start()
     {
-        detectionRefreshTimer = Time.time + 1;
+        detectionRefreshTimer = Time.time + 0.5f;
     }
 
     void Update()
@@ -40,7 +39,7 @@ public class MachinegunEnemyBehavior : MonoBehaviour
     void PlayerDetectionCheck()
     {
         detectionOrigin = new Vector2(transform.position.x, transform.position.y);
-        detectedObject = Physics2D.CircleCast(detectionOrigin, detectionSize, detectionOriginOffset, 0F, playerLayer);
+        detectedObject = Physics2D.CircleCast(detectionOrigin, detectionSize, Vector2.zero, 0F, playerLayer);
         if (detectedObject)
         {
             detectedObjectPosition = new Vector2(detectedObject.transform.position.x, detectedObject.transform.position.y);
