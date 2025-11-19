@@ -7,12 +7,14 @@ public class SplitterBehaviour : MonoBehaviour
     float detectionSize = 20;
     public Vector2 detectionOrigin;
     public Vector2 detectedObjectPosition;
+    float detectionRaycastAngle;
     public LayerMask playerLayer;
     RaycastHit2D detectedObject;
     float detectionRefreshTimer = 3;
     public Rigidbody2D projectile;
     Rigidbody2D instantiatedProjectileOne;
     Rigidbody2D instantiatedProjectileTwo;
+    Vector2 coordDifference;
     public Vector2 aimVectorOne;
     public Vector2 aimVectorTwo;
 
@@ -36,10 +38,11 @@ public class SplitterBehaviour : MonoBehaviour
         if (detectedObject)
         {
             detectedObjectPosition = new Vector2(detectedObject.transform.position.x, detectedObject.transform.position.y);
-            aimVectorOne = detectedObjectPosition * 1.3f - detectionOrigin; //this does not work properly, value difference between aimvector one and two can vary wildly based on how close the player is to being on the same X or Y coordinate of the enemy
-            aimVectorOne.Normalize();
-            aimVectorTwo = detectedObjectPosition * 0.7f - detectionOrigin;
-            aimVectorTwo.Normalize();
+            coordDifference = detectedObjectPosition - detectionOrigin;
+            coordDifference.Normalize();
+            detectionRaycastAngle = Mathf.Atan2(coordDifference.x, coordDifference.y) * Mathf.Rad2Deg;
+            aimVectorOne = new Vector2(Mathf.Sin(detectionRaycastAngle), Mathf.Cos(detectionRaycastAngle));
+            aimVectorTwo = new Vector2(Mathf.Sin(detectionRaycastAngle), Mathf.Cos(detectionRaycastAngle));
             if (PlayerDetected == false)
             {
                 PlayerDetected = true;
