@@ -5,57 +5,9 @@ public class ChaserBehavior : MonoBehaviour
     public float health;
     public float contactDamage;
     public Rigidbody2D self;
-    public bool PlayerDetected = false;
-    float detectionSize = 20;
-    public Vector2 detectionOrigin;
-    public Vector2 detectedObjectPosition;
-    public LayerMask playerLayer;
-    RaycastHit2D detectedObject;
-    public float detectionRefreshTimer;
-    public Vector2 aimVector;
     Vector3 damageAndVelocity;
-    void Start()
-    {
-        detectionRefreshTimer = Time.time + 0.5f;
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (detectionRefreshTimer < Time.time)
-        {
-            PlayerDetectionCheck();
-        }
-    }
-
-    void PlayerDetectionCheck()
-    {
-        detectionOrigin = new Vector2(transform.position.x, transform.position.y);
-        detectedObject = Physics2D.CircleCast(detectionOrigin, detectionSize, Vector2.zero, 0F, playerLayer);
-        if (detectedObject)
-        {
-            detectedObjectPosition = new Vector2(detectedObject.transform.position.x, detectedObject.transform.position.y);
-            aimVector = detectedObjectPosition - detectionOrigin;
-            aimVector.Normalize();
-            Debug.Log(aimVector);
-            if (PlayerDetected == false)
-            {
-                PlayerDetected = true;
-                detectionRefreshTimer += 3;
-            }
-            else
-            {
-                AttackPlayer();
-                detectionRefreshTimer += 3;
-            }
-        }
-        else
-        {
-            PlayerDetected = false;
-        }
-    }
-
-    void AttackPlayer()
+    void Attack(Vector2 aimVector)
     {
         self.AddForce(aimVector * 1200);
     }

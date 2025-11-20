@@ -4,80 +4,45 @@ using UnityEngine;
 public class MachinegunEnemyBehavior : MonoBehaviour
 {
     public float health;
-    public bool PlayerDetected = false;
-    float detectionSize = 20;
-    public Vector2 detectionOrigin;
-    public Vector2 detectedObjectPosition;
-    public LayerMask playerLayer;
-    RaycastHit2D detectedObject;
-    float detectionRefreshTimer = 3;
-    float attackDelay = 0.2f;
-    bool shootingBurst = false;
-    int attackCount = 5;
+    public float attackDelay = 0.2f;
+    public bool shootingBurst = false;
+    public int attackCount = 0;
     public Rigidbody2D projectile;
     Rigidbody2D instantiatedProjectile;
-    public Vector2 aimVector;
+    Vector2 storedAimVector;
 
-    void Start()
-    {
-        detectionRefreshTimer = Time.time + 0.5f;
-    }
 
     void Update()
     {
-        if (detectionRefreshTimer < Time.time)
-        {
-            PlayerDetectionCheck();
-        }
         if (shootingBurst == true && attackDelay < Time.time)
         {
-            ShootProjectile();
+            AttackAgain();
             attackDelay = Time.time + 0.2F;
         }
     }
-
-    void PlayerDetectionCheck()
+    void Attack(Vector2 aimVector)
     {
-        detectionOrigin = new Vector2(transform.position.x, transform.position.y);
-        detectedObject = Physics2D.CircleCast(detectionOrigin, detectionSize, Vector2.zero, 0F, playerLayer);
-        if (detectedObject)
+
+        if (attackCount == 0 && shootingBurst == false)
         {
-            detectedObjectPosition = new Vector2(detectedObject.transform.position.x, detectedObject.transform.position.y);
-            if (PlayerDetected == false)
-            {
-                PlayerDetected = true;
-                detectionRefreshTimer += 3;
-            }
-            else if (shootingBurst == false && PlayerDetected == true)
-            {
-                aimVector = detectedObjectPosition - detectionOrigin;
-                aimVector.Normalize();
-                ShootProjectile();
-                shootingBurst = true;
-                detectionRefreshTimer += 3;
-                attackCount = 5;
-            }
-            Debug.Log("Player found");
-        }
-        else
-        {
-            PlayerDetected = false;
+            attackCount = 5;
+            shootingBurst = true;
+            storedAimVector = aimVector;
         }
     }
 
-    void ShootProjectile()
+    void AttackAgain()
     {
-
         if (attackCount > 0)
         {
             instantiatedProjectile = Instantiate(projectile, gameObject.transform);
-            instantiatedProjectile.linearVelocity = aimVector * 4f;
+            instantiatedProjectile.linearVelocity = storedAimVector * 4f;
             attackCount--;
+            attackDelay = Time.time + 0.2F;
         }
-        if (attackCount == 0)
+        if (attackCount == 0 && shootingBurst == true)
         {
             shootingBurst = false;
-            detectionRefreshTimer = Time.time + 3;
         }
     }
 
