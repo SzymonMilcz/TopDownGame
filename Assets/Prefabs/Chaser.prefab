@@ -173,7 +173,7 @@ MonoBehaviour:
   detectionSize: 20
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   detectionTimeAmount: 1.5
 --- !u!114 &-8873680650104196636
 MonoBehaviour:

@@ -10,8 +10,10 @@ public class PlayerBehaviour : MonoBehaviour
     InputAction attackAction;
     public Slider healthSlider;
     public Rigidbody2D rb;
+    public SpriteRenderer selfSprite;
     public float health; //Value is made public for testing purposes; it can be seen in the editor if it's public
-    private float mercyInvincible = 0; //Value used to grant temporary invulnerability after taking damage, roughly for one second
+    float mercyInvincible = 0; //Value used to grant temporary invulnerability after taking damage, roughly for one second
+    bool recentlyTookDamage = false;
     Vector3 cursorPosition;
     private Camera cam;
     Vector3 shootingAngle;
@@ -40,6 +42,11 @@ public class PlayerBehaviour : MonoBehaviour
         {
             Attack();
         }
+        if (mercyInvincible < Time.time && recentlyTookDamage == true)
+        {
+            selfSprite.color = Color.white;
+            recentlyTookDamage = false;
+        }
     }
 
     public void HealthCheck(float damageValue)
@@ -50,7 +57,8 @@ public class PlayerBehaviour : MonoBehaviour
             healthSlider.value = health;
             Debug.Log("Current health: " + health);
             mercyInvincible = Time.time + 1F;
-            Debug.Log(Time.time);
+            selfSprite.color = Color.red;
+            recentlyTookDamage = true;
         }
         if (health <= 0)
         {
