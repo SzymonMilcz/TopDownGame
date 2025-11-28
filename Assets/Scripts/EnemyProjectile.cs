@@ -7,7 +7,6 @@ public class EnemyProjectile : MonoBehaviour
     public float projectileLifetime;
     void Start()
     {
-        Physics2D.IgnoreLayerCollision(6, 6);
         projectileLifetime += Time.time;
     }
 
