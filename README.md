@@ -13,13 +13,14 @@ Najnowsze zmiany w projekcie znajdują się na branchu "dev", który jest regula
 - Ulepszenia nie tylko usprawniają siłę postaci gracza, ale także umożliwiają inne sposoby walki z przeciwnikami, alternatywne zdolności z własnymi zaletami i wadami oraz ogólnie zapewniają możliwość rozgrywki w różne sposoby.
 - Gra kończy się po oczyszczeniu określonej ilości pokojów (liczba obecnie nieokreślona; np. 50?)
 
-## Ważne mechaniki
+## Ważne mechaniki i założenia
 
 - Geometria, miejsce pojawiania się przeciwników oraz ich typ są tworzone poprzez utworzone wcześniej szablony.
 - Oczyszczanie pokoi podnosi licznik poziomu trudności, który wpływa na ilość, typ i ogólną moc przeciwników.
 - To, kiedy pojawiają się przeciwnicy silniejsi bądź elitarni, powinno być zarządzane poprzez pulę punktów ustalaną za pomocą obecnego poziomu trudności.
 - Każde podniesienie poziomu trudności powinno być o wyższą wartość niż poprzednie (ustalone według odpowiedniego równania).
 - Pokonanie wszystkich przeciwników w pokoju oczyszcza go i otwiera ścieżkę do nowych pokojów, oraz umożliwia wzięcie jedno z trzech losowo wybranych ulepszeń.
+- Wszyscy przeciwnicy powinni mieć unikalną sylwetkę i rozpoznawalny wygląd, w kolorze i kształcie- tak, aby nie pomylić przeciwnika z innym, i aby od razu było wiadomo, z jakim przeciwnikiem gracz ma do czynienia.
 
 ## Pokoje
 
@@ -27,6 +28,7 @@ Najnowsze zmiany w projekcie znajdują się na branchu "dev", który jest regula
 - Część terenu może być zniszczalna może?
 - Projekt pokojów powinien brać pod uwagę możliwości nie tylko gracza i potencjalne jego ulepszenia, ale także i przeciwników - zwłaszcza, że ściany blokują pociski.
 - Pokoje zawierają "spawnery" - nietylane obiekty bez kolizji (jednak widoczne), z których tworzeni są przeciwnicy. Gdy wszyscy przeciwnicy w danym pokoju zostają stworzeni, "spawner" zostaje usunięty.
+- Owe "spawnery" korzystają z ograniczonej puli punktów, wydawanych do tworzenia przeciwników; owa pula resetuje się z każdym pokojem po jej wyczerpaniu i rośnie proporcjonalnie z poziomem trudności.
 
 ## Ulepszenia
 
@@ -55,6 +57,9 @@ Gracz steruje postacią, która zaczyna ze 100 punktami zdrowia i możliwością
 - Atak jest celowany kursorem myszy, aktywowany lewym przyciskiem myszy.
   - Warto dać zdolność alternatywną na drugi przycisk myszy.
 - Bezpośredni kontakt postaci z przeciwnikiem oznacza odepchnięcie gracza i otrzymanie obrażeń.
+- Otrzymanie obrażeń zapewnia krótkotrwałą niewrażliwość na ataki, aby uniknąć natychmiastowej śmierci w niektórych przypadkach (jak np. bezpośrednia kolizja z wrogiem)
+- Po otrzymaniu obrażeń postać podświetla się na czerwono, oznaczając że właśnie została trafiona atakiem.
+  - Podświetlenie utrzymuje się dopóki gracz posiada krótkotrwałą niewrażliwość na ataki bezpośrednio po zostaniu trafionym.
 
 ## Przeciwnicy
 
@@ -69,10 +74,12 @@ Poniżej przedstawiono niektóre typy przeciwników:
 ### Agresor
 - Wykonuje krótkie szarże w stronę gracza co około sekundę, starając się go staranować.
 - Dość wytrzymały, zadający spore obrażenia przy kontakcie z graczem i odpychając zarówno jego, jak i siebie.
-### Miotacz
-- Miota dwoma kulami jednocześnie w seriach, lecz nie bezpośrednio w gracza: jedna leci przed gracza, a druga za niego.
-- Dość rzadki i powolny, twardszy niż Strzelec.
 ### Maszynowiec
 - Wystrzeliwuję serię pocisków w jednej linii; po wystrzeleniu pierwszego pocisku w serii kąt ostrzału pozostaje ten sam, dopóki seria się nie zakończy.
 - Długie odstępy między seriami, podobna wytrzymałość do Miotacza.
+### Saper
+- Pasywny dopóki gracz go nie uderzy, lub nie podejdzie zbyt blisko.
+- Atakuje poprzez najpierw gonitwę za graczem, z niską początkową prędkością która stale rośnie - po upływie 3 sekund wybucha, zadając znaczne obrażenia wszystkiemu w pobliżu, w tym wrogom.
+- Detonacja nie następuje po śmierci z rąk gracza. Niska wytrzymałość.
+
 
