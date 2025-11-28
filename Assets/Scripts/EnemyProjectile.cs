@@ -4,11 +4,9 @@ public class EnemyProjectile : MonoBehaviour
 {
     public int damageValue;
     public Collider2D projectileCollider;
-    public LayerMask projectileLayer;
     public float projectileLifetime;
     void Start()
     {
-        Physics2D.IgnoreLayerCollision(6, 6);
         projectileLifetime += Time.time;
     }
 

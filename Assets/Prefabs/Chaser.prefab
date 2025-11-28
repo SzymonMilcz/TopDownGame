@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7341774215322904383}
   - component: {fileID: 3510250331065009352}
   - component: {fileID: -6804675308787444801}
+  - component: {fileID: -1170072416283498248}
   - component: {fileID: -8873680650104196636}
   m_Layer: 6
   m_Name: Chaser
@@ -156,6 +157,24 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &-1170072416283498248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855006386929772858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd2eab6a688226146a4573ede274226d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDetection
+  PlayerDetected: 0
+  detectionSize: 20
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  detectionTimeAmount: 1.5
 --- !u!114 &-8873680650104196636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,11 +190,3 @@ MonoBehaviour:
   health: 100
   contactDamage: 40
   self: {fileID: 3510250331065009352}
-  PlayerDetected: 0
-  detectionOrigin: {x: 0, y: 0}
-  detectedObjectPosition: {x: 0, y: 0}
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  detectionRefreshTimer: 1
-  aimVector: {x: 0, y: 0}

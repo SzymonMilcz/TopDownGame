@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7138984070134042225}
   - component: {fileID: 5172997065871318773}
   - component: {fileID: 190179698278318542}
+  - component: {fileID: -5282415910097365004}
   - component: {fileID: 1867089511622822842}
   m_Layer: 6
   m_Name: Machinegunner
@@ -156,6 +157,24 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.6
+--- !u!114 &-5282415910097365004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8244804480779890946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd2eab6a688226146a4573ede274226d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDetection
+  PlayerDetected: 0
+  detectionSize: 20
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  detectionTimeAmount: 5
 --- !u!114 &1867089511622822842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,11 +188,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MachinegunEnemyBehavior
   health: 100
-  PlayerDetected: 0
-  detectionOrigin: {x: 0, y: 0}
-  detectedObjectPosition: {x: 0, y: 0}
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 8
   projectile: {fileID: 346841848313743422, guid: aafdc73d4725c19469d6458093109a61, type: 3}
-  aimVector: {x: 0, y: 0}
