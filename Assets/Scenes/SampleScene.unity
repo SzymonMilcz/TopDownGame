@@ -802,6 +802,8 @@ GameObject:
   - component: {fileID: 1680712991}
   - component: {fileID: 1680712990}
   - component: {fileID: 1680712994}
+  - component: {fileID: 1680712996}
+  - component: {fileID: 1680712995}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -973,6 +975,36 @@ MonoBehaviour:
   health: 100
   projectile: {fileID: 995368999579798282, guid: 1599b79d679e8d34d9e0e0e646dc8dce, type: 3}
   shootingDelay: 0.8
+--- !u!114 &1680712995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680712989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed8b1ae4e4e52b34ea557c1c11e076fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.2D.Animation.Runtime::UnityEngine.U2D.Animation.SpriteResolver
+  m_CategoryHash: 0
+  m_labelHash: 0
+  m_SpriteKey: 0
+  m_SpriteHash: 113639805
+--- !u!114 &1680712996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680712989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c29cff538c195c249b69c6f2236de67b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.2D.Animation.Runtime::UnityEngine.U2D.Animation.SpriteLibrary
+  m_Library: []
+  m_SpriteLibraryAsset: {fileID: 7108339969198208228, guid: 17c68fc6aec8ee246a95effab681189d, type: 3}
 --- !u!1 &1896392118
 GameObject:
   m_ObjectHideFlags: 0

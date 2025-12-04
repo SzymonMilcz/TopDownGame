@@ -37,6 +37,7 @@ public class PlayerBehaviour : MonoBehaviour
         Vector2 moveValue = moveAction.ReadValue<Vector2>();
             rb.linearVelocityX = moveValue.x * 3;
             rb.linearVelocityY = moveValue.y * 3;  
+        if (moveValue.x > 0)
 
         if (attackAction.IsPressed())
         {
