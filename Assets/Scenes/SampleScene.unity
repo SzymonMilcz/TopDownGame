@@ -630,6 +630,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7341774215322904383, guid: c9a21d063e7e70b4db3950b8c8553c41, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0dfa3ef78ea80954f993334bd1e012c5, type: 3}
+    - target: {fileID: 7341774215322904383, guid: c9a21d063e7e70b4db3950b8c8553c41, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7341774215322904383, guid: c9a21d063e7e70b4db3950b8c8553c41, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7341774215322904383, guid: c9a21d063e7e70b4db3950b8c8553c41, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7341774215322904383, guid: c9a21d063e7e70b4db3950b8c8553c41, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -855,7 +875,6 @@ GameObject:
   - component: {fileID: 1680712991}
   - component: {fileID: 1680712990}
   - component: {fileID: 1680712994}
-  - component: {fileID: 1680712996}
   - component: {fileID: 1680712995}
   m_Layer: 3
   m_Name: Player
@@ -1025,39 +1044,32 @@ MonoBehaviour:
   healthSlider: {fileID: 1896392120}
   rb: {fileID: 1680712991}
   selfSprite: {fileID: 1680712992}
+  animator: {fileID: 1680712995}
   health: 100
   projectile: {fileID: 995368999579798282, guid: 1599b79d679e8d34d9e0e0e646dc8dce, type: 3}
   shootingDelay: 0.8
---- !u!114 &1680712995
-MonoBehaviour:
+--- !u!95 &1680712995
+Animator:
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1680712989}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed8b1ae4e4e52b34ea557c1c11e076fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.2D.Animation.Runtime::UnityEngine.U2D.Animation.SpriteResolver
-  m_CategoryHash: 1.02410915e-25
-  m_labelHash: 0.000006798764
-  m_SpriteKey: 0
-  m_SpriteHash: 113639805
---- !u!114 &1680712996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1680712989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c29cff538c195c249b69c6f2236de67b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.2D.Animation.Runtime::UnityEngine.U2D.Animation.SpriteLibrary
-  m_Library: []
-  m_SpriteLibraryAsset: {fileID: 7108339969198208228, guid: 17c68fc6aec8ee246a95effab681189d, type: 3}
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 389affed454e8d941be829d911eb45c4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1896392118
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ public class PlayerBehaviour : MonoBehaviour
     public Slider healthSlider;
     public Rigidbody2D rb;
     public SpriteRenderer selfSprite;
+    public Animator animator;
     public float health; //Value is made public for testing purposes; it can be seen in the editor if it's public
     float mercyInvincible = 0; //Value used to grant temporary invulnerability after taking damage, roughly for one second
     bool recentlyTookDamage = false;
@@ -35,10 +36,11 @@ public class PlayerBehaviour : MonoBehaviour
     {
         //Velocity achieved via copying the moveValue is too slow, so it is increased threefold
         Vector2 moveValue = moveAction.ReadValue<Vector2>();
+            animator.SetFloat("X", moveValue.x);
+            animator.SetFloat("Y", moveValue.y);
             rb.linearVelocityX = moveValue.x * 3;
             rb.linearVelocityY = moveValue.y * 3;  
-        if (moveValue.x > 0)
-
+            
         if (attackAction.IsPressed())
         {
             Attack();
