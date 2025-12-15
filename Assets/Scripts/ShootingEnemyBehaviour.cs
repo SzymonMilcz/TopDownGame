@@ -6,18 +6,7 @@ public class ShootingEnemyBehaviour : MonoBehaviour
     public Rigidbody2D projectile;
     Rigidbody2D instantiatedProjectile;
     public Vector2 aimVector;
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
-
+    
     void Attack(Vector2 aimVector)
     {
         instantiatedProjectile = Instantiate(projectile, gameObject.transform);
