@@ -4,21 +4,27 @@ public class SpawnPointScript : MonoBehaviour
 {
     public Rigidbody2D triangle;
     float spawnTimer = 0;
-    public int spawnCount;
+
+    float spawnPointCount;
 
     void Start()
     {
         spawnTimer = Time.time;
     }
 
+    public void receivePoints(float pointsReceived)
+    {
+        spawnPointCount = pointsReceived;
+    }
+
     void Update()
     {
-        if (spawnTimer < Time.time && spawnCount > 0)
+        if (spawnTimer < Time.time && spawnPointCount > 0)
         {
             Instantiate(triangle, transform.position, Quaternion.identity);
             spawnTimer = Time.time + 5;
-            spawnCount--;
-            if (spawnCount <= 0)
+            spawnPointCount-= 25;
+            if (spawnPointCount <= 0)
             {
                 Destroy(gameObject);
             }
