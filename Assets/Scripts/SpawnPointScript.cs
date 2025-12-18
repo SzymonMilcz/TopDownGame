@@ -9,7 +9,7 @@ public class SpawnPointScript : MonoBehaviour
 
     void Start()
     {
-        spawnTimer = Time.time;
+        spawnTimer = Time.time + 0.5f;
     }
 
     public void receivePoints(float pointsReceived)
@@ -21,13 +21,14 @@ public class SpawnPointScript : MonoBehaviour
     {
         if (spawnTimer < Time.time && spawnPointCount > 0)
         {
-            Instantiate(triangle, transform.position, Quaternion.identity);
+            Instantiate(triangle, transform.position, Quaternion.identity, transform);
             spawnTimer = Time.time + 5;
             spawnPointCount-= 25;
-            if (spawnPointCount <= 0)
+            
+        }
+        if (spawnPointCount <= 0 && transform.childCount == 0)
             {
                 Destroy(gameObject);
             }
-        }
     }
 }
