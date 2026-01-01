@@ -5,6 +5,7 @@ public class GameControllerScript : MonoBehaviour
     float spawnPointCount;
     float difficultyLevel = 1;
     int spawnerAmount;
+    int depletedSpawnerCount = 0;
 
     void Start()
     {
@@ -20,5 +21,14 @@ public class GameControllerScript : MonoBehaviour
     void distributePoints()
     {
         SendMessage("receivePoints", spawnPointCount / transform.childCount);
+    }
+
+    void receiveSpawnerMessage()
+    {
+        depletedSpawnerCount++;
+        if (depletedSpawnerCount == spawnerAmount)
+        {
+            Debug.Log("Room Clear!");
+        }
     }
 }

@@ -13,6 +13,7 @@ public class PlayerBehaviour : MonoBehaviour
     public SpriteRenderer selfSprite;
     public Animator animator;
     public float health; //Value is made public for testing purposes; it can be seen in the editor if it's public
+    float maxHealth;
     float mercyInvincible = 0; //Value used to grant temporary invulnerability after taking damage, roughly for one second
     bool recentlyTookDamage = false;
     Vector3 cursorPosition;
@@ -27,6 +28,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         moveAction = InputSystem.actions.FindAction("Move");
         attackAction = InputSystem.actions.FindAction("Attack");
+        maxHealth = health;
         healthSlider.maxValue = health;
         healthSlider.value = health; 
         cam = Camera.main;
@@ -49,6 +51,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             selfSprite.color = Color.white;
             recentlyTookDamage = false;
+
         }
     }
 
@@ -67,6 +70,16 @@ public class PlayerBehaviour : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void ReceiveHealth(float healValue)
+    {
+        health = health + healValue;
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+        healthSlider.value = health;
     }
 
     public void HeavyDamage(Vector3 damageReceived)
