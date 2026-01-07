@@ -4,12 +4,13 @@ public class GameControllerScript : MonoBehaviour
 {
     float spawnPointCount;
     float difficultyLevel = 1;
+    bool isRoomCleared = false;
     int spawnerAmount;
     int depletedSpawnerCount = 0;
 
     void Start()
     {
-        spawnerAmount = transform.childCount;
+        spawnerAmount = transform.childCount - 1;
         spawnPointCount = difficultyLevel * 100;
         foreach (var tg in GetComponentsInChildren<SpawnPointScript>())
         {
@@ -29,6 +30,13 @@ public class GameControllerScript : MonoBehaviour
         if (depletedSpawnerCount == spawnerAmount)
         {
             Debug.Log("Room Clear!");
+            isRoomCleared = true;
+            grantPickup();
         }
+    }
+
+    void grantPickup()
+    {
+        SendMessage("spawnHealthPickup");
     }
 }
