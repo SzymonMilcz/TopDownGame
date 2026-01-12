@@ -37,6 +37,6 @@ public class GameControllerScript : MonoBehaviour
 
     void grantPickup()
     {
-        SendMessage("spawnHealthPickup");
+        BroadcastMessage("spawnHealthPickup");
     }
 }

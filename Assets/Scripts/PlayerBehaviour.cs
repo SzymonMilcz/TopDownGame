@@ -40,8 +40,8 @@ public class PlayerBehaviour : MonoBehaviour
         Vector2 moveValue = moveAction.ReadValue<Vector2>();
             animator.SetFloat("X", moveValue.x);
             animator.SetFloat("Y", moveValue.y);
-            rb.linearVelocityX = moveValue.x * 3;
-            rb.linearVelocityY = moveValue.y * 3;  
+            rb.linearVelocityX = moveValue.x * 4;
+            rb.linearVelocityY = moveValue.y * 4;  
             
         if (attackAction.IsPressed())
         {
@@ -97,7 +97,7 @@ public class PlayerBehaviour : MonoBehaviour
             shootingAngle.Normalize();
             projectileOrigin = transform.position + shootingAngle;
             instantiatedProjectile = Instantiate(projectile, projectileOrigin, Quaternion.identity, transform);
-            instantiatedProjectile.AddForce(shootingAngle * 200);
+            instantiatedProjectile.AddForce(shootingAngle * 250);
             currentShootingDelay = Time.time + shootingDelay;
         }
         

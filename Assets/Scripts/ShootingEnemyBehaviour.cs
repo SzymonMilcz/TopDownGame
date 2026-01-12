@@ -10,7 +10,7 @@ public class ShootingEnemyBehaviour : MonoBehaviour
     void Attack(Vector2 aimVector)
     {
         instantiatedProjectile = Instantiate(projectile, gameObject.transform);
-        instantiatedProjectile.linearVelocity = aimVector * 4f;
+        instantiatedProjectile.linearVelocity = aimVector * 6f;
     }
 
     void HealthCheck(float damageValue)
@@ -18,6 +18,7 @@ public class ShootingEnemyBehaviour : MonoBehaviour
         health = health - damageValue;
         if (health <= 0)
         {
+            transform.DetachChildren();
             Destroy(gameObject);
         }
     }
