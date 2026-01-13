@@ -4,7 +4,6 @@ public class PlayerProjectileBehavior : MonoBehaviour
 {
     public int damageValue;
     public Collider2D projectileCollider;
-    public LayerMask projectileLayer;
     public float projectileLifetime;
     void Start()
     {
@@ -28,7 +27,7 @@ public class PlayerProjectileBehavior : MonoBehaviour
         }
         if (touchedObj.gameObject.CompareTag("Player") || touchedObj.gameObject.CompareTag("Projectile"))
         {
-            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), touchedObj.gameObject.GetComponent<Collider2D>());
+            Physics2D.IgnoreCollision(projectileCollider.GetComponent<Collider2D>(), touchedObj.gameObject.GetComponent<Collider2D>());
         }
         else
         {

@@ -11,7 +11,9 @@ public class PlayerBehaviour : MonoBehaviour
     public Slider healthSlider;
     public Rigidbody2D rb;
     public SpriteRenderer selfSprite;
+    public Animator animator;
     public float health; //Value is made public for testing purposes; it can be seen in the editor if it's public
+    float maxHealth;
     float mercyInvincible = 0; //Value used to grant temporary invulnerability after taking damage, roughly for one second
     bool recentlyTookDamage = false;
     Vector3 cursorPosition;
@@ -26,6 +28,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         moveAction = InputSystem.actions.FindAction("Move");
         attackAction = InputSystem.actions.FindAction("Attack");
+        maxHealth = health;
         healthSlider.maxValue = health;
         healthSlider.value = health; 
         cam = Camera.main;
@@ -35,9 +38,11 @@ public class PlayerBehaviour : MonoBehaviour
     {
         //Velocity achieved via copying the moveValue is too slow, so it is increased threefold
         Vector2 moveValue = moveAction.ReadValue<Vector2>();
-            rb.linearVelocityX = moveValue.x * 3;
-            rb.linearVelocityY = moveValue.y * 3;  
-
+            animator.SetFloat("X", moveValue.x);
+            animator.SetFloat("Y", moveValue.y);
+            rb.linearVelocityX = moveValue.x * 4;
+            rb.linearVelocityY = moveValue.y * 4;  
+            
         if (attackAction.IsPressed())
         {
             Attack();
@@ -46,6 +51,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             selfSprite.color = Color.white;
             recentlyTookDamage = false;
+
         }
     }
 
@@ -66,6 +72,16 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+    public void ReceiveHealth(float healValue)
+    {
+        health = health + healValue;
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+        healthSlider.value = health;
+    }
+
     public void HeavyDamage(Vector3 damageReceived)
     {
         rb.AddForce(new Vector2(damageReceived.x, damageReceived.y) * 3);
@@ -81,7 +97,7 @@ public class PlayerBehaviour : MonoBehaviour
             shootingAngle.Normalize();
             projectileOrigin = transform.position + shootingAngle;
             instantiatedProjectile = Instantiate(projectile, projectileOrigin, Quaternion.identity, transform);
-            instantiatedProjectile.AddForce(shootingAngle * 200);
+            instantiatedProjectile.AddForce(shootingAngle * 250);
             currentShootingDelay = Time.time + shootingDelay;
         }
         
