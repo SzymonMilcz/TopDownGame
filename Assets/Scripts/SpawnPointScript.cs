@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SpawnPointScript : MonoBehaviour
 {
-    public Rigidbody2D triangle;
+    public Rigidbody2D enemyToSpawn;
     float spawnTimer = 0;
     float spawnPointCount;
     public float enemyPointValue;
@@ -21,7 +21,7 @@ public class SpawnPointScript : MonoBehaviour
     {
         if (spawnTimer < Time.time && spawnPointCount > enemyPointValue)
         {
-            Instantiate(triangle, transform.position, Quaternion.identity, transform);
+            Instantiate(enemyToSpawn, transform.position, Quaternion.identity, transform);
             spawnTimer = Time.time + 5;
             spawnPointCount-= enemyPointValue;
             
