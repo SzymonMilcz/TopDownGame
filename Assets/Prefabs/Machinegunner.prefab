@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 09ac61203ed38d7419bc3d1535b8717b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -188,4 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MachinegunEnemyBehavior
   health: 100
+  attackDelay: 0.2
+  shootingBurst: 0
+  attackCount: 0
   projectile: {fileID: 346841848313743422, guid: aafdc73d4725c19469d6458093109a61, type: 3}
