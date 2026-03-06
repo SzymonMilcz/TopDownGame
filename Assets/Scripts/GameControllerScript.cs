@@ -10,14 +10,8 @@ public class GameControllerScript : MonoBehaviour
 
     void Start()
     {
-        spawnerAmount = transform.childCount - 1;
-        spawnPointCount = difficultyLevel * 100;
-        foreach (var tg in GetComponentsInChildren<SpawnPointScript>())
-        {
-            tg.receivePoints(spawnPointCount / transform.childCount);
-        }
+        nextWave();
     }
-
 
     void distributePoints()
     {
@@ -38,5 +32,15 @@ public class GameControllerScript : MonoBehaviour
     void grantPickup()
     {
         BroadcastMessage("spawnHealthPickup");
+    }
+
+    void nextWave()
+    {
+        spawnerAmount = transform.childCount - 1;
+        spawnPointCount = difficultyLevel * 100;
+        foreach (var tg in GetComponentsInChildren<SpawnPointScript>())
+        {
+            tg.receivePoints(spawnPointCount / transform.childCount);
+        }
     }
 }
