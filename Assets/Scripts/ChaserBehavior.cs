@@ -5,8 +5,22 @@ public class ChaserBehavior : MonoBehaviour
     public float health;
     public float contactDamage;
     public Rigidbody2D self;
+    public SpriteRenderer selfSprite;
     Vector3 damageAndVelocity;
+    float damagedColorTimer;
 
+
+    void Update ()
+    {
+        if (damagedColorTimer > Time.time)
+        {
+            selfSprite.color = Color.red;
+        }
+        else
+        {
+            selfSprite.color = Color.white;
+        }
+    }
     void Attack(Vector2 aimVector)
     {
         self.AddForce(aimVector * 1200);
@@ -33,6 +47,7 @@ public class ChaserBehavior : MonoBehaviour
     void HealthCheck(float damageValue)
     {
         health = health - damageValue;
+        damagedColorTimer = Time.time + 1; 
         if (health <= 0)
         {
             Destroy(gameObject);
