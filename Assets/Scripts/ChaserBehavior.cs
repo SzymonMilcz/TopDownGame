@@ -47,7 +47,7 @@ public class ChaserBehavior : MonoBehaviour
     void HealthCheck(float damageValue)
     {
         health = health - damageValue;
-        damagedColorTimer = Time.time + 1; 
+        damagedColorTimer = Time.time + 0.3f; 
         if (health <= 0)
         {
             Destroy(gameObject);
